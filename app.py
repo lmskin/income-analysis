@@ -56,7 +56,7 @@ if uploaded_file is not None:
 
     elif analysis_type == "Top 50 Members":
         # Group by 'Member code' and sum the 'Paid amount'
-        top_members = df.groupby('Member code')['Paid amount'].sum().reset_index()
+        top_members = df.groupby(['Member code', 'Member name'])['Paid amount'].sum().reset_index()
 
         # Sort the members by total paid amount in descending order
         top_members = top_members.sort_values(by='Paid amount', ascending=False).head(50)
