@@ -12,8 +12,8 @@ uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 analysis_type = st.selectbox("Choose analysis type:", ["Monthly Paid Amount", "Quarterly Paid Amount", "Yearly Paid Amount", "Top 50 Members"])
 
 if uploaded_file is not None:
-    # Read the specific sheet from the uploaded Excel file
-    df = pd.read_excel(uploaded_file, sheet_name='Invoicejournal')
+    # Read the specific sheet from the uploaded Excel file (skip first 10 metadata rows)
+    df = pd.read_excel(uploaded_file, sheet_name='Invoicejournal', header=10)
 
     # Convert 'Invoice date' to datetime, handling different formats
     df['Invoice date'] = pd.to_datetime(df['Invoice date'], errors='coerce')
